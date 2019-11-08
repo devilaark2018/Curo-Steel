@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import fontReducer from './fontreducer';
+import userReducer from './userreducer';
 const initialState = {
     dlgDetails:{
       showdlg:false,
@@ -29,6 +30,7 @@ const progressDlgReducer = (state = initialState, action) =>{
 
 const rootReducer = combineReducers({
     progressDlgReducer,
-    fontReducer
+    fontReducer,
+    userReducer
 })
 export default rootReducer
