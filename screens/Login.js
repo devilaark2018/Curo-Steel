@@ -9,7 +9,6 @@ import Images from "../app_imgs/Images";
 //import { Font } from "expo";
 import { loadCustomFont } from '../actions/fontloader'
 
-import * as Font from "expo-font";
 const { width, height } = Dimensions.get("screen");
 const DismissKeyboard = ({children}) => (
     <TouchableWithoutFeedback onPress = {()=>{Keyboard.dismiss();}}>
@@ -43,24 +42,7 @@ class Login extends React.Component {
         });
     }
 
-    async componentDidMount() {
-
-        await Font.loadAsync({
-            "SFUIDi_bold": require("../assets/font/SFUIDisplay-Bold.ttf"),
-            "SFUIDi_thin": require("../assets/font/SFUIDisplay_thin.ttf"),
-            "SFUIDi_light": require("../assets/font/SFUIDisplay-Light.ttf"),
-            "SFUIDi_medium": require("../assets/font/SFUIDisplay-Medium.ttf"),
-            "SFUIDi_regular": require("../assets/font/SFUIDisplay-Regular.ttf"),
-            "SFUIDi_semibold": require("../assets/font/SFUIDisplay-Semibold.ttf"),
-            "SFPro_bold": require("../assets/font/SFProText-Bold.ttf"),
-            "SFPro_medium": require("../assets/font/SFProText-Medium.ttf"),
-            "SFPro_semibold": require("../assets/font/SFProText-Semibold.ttf"),
-            "SFPro_regular": require("../assets/font/SFProText-Regular.ttf"),
-            "Raleway_bold": require("../assets/font/Raleway-Bold.ttf")
-        });
-        // this.setState({
-        //     fontLoaded: true,
-        // });
+     componentDidMount() {
         this.props.loadCustomFont();
     }
     
