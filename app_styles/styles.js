@@ -91,7 +91,12 @@ export default styles = StyleSheet.create({
     borderColor: '#d3d3d3',
     borderWidth: 1,
     // textAlign: 'center'
-    textAlign:'left'
+    textAlign:'left',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.2,
+    shadowRadius: 2
+    
   },
   postPhoto: {
     height: 250,
@@ -125,11 +130,29 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor:'#d3d3d3',
     borderColor: '#d3d3d3',
-    borderWidth: 1,
-    borderRadius: 5,
+    
     // width: 250
     width: width * .85
-
+  },
+  buttonPrimary:{
+    backgroundColor:'#f47532',
+    borderColor: '#f47532',
+    borderWidth: 1,
+    borderRadius: 4,
+    shadowColor: '#000',
+    shadowOffset: {width: 0,height: 2},
+    shadowRadius: 2,
+    shadowOpacity: 0.55
+  },
+  buttonSecondary:{
+    backgroundColor:'#212529',
+    borderColor: '#212529',
+    borderWidth: 1,
+    borderRadius: 4,
+    shadowColor: '#000',
+    shadowOffset: {width: 0,height: 2},
+    shadowRadius: 2,
+    shadowOpacity: 0.55
   },
   buttonSmall: {
     margin: 10,
