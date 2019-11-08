@@ -7,6 +7,8 @@ import { Card } from 'react-native-elements';
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
 import Images from "../app_imgs/Images";
 //import { Font } from "expo";
+import { loadCustomFont } from '../actions/fontloader'
+
 import * as Font from "expo-font";
 const { width, height } = Dimensions.get("screen");
 const DismissKeyboard = ({children}) => (
@@ -56,9 +58,10 @@ class Login extends React.Component {
             "SFPro_regular": require("../assets/font/SFProText-Regular.ttf"),
             "Raleway_bold": require("../assets/font/Raleway-Bold.ttf")
         });
-        this.setState({
-            fontLoaded: true,
-        });
+        // this.setState({
+        //     fontLoaded: true,
+        // });
+        this.props.loadCustomFont();
     }
     
     render(){
@@ -69,7 +72,7 @@ class Login extends React.Component {
                 
             <ImageBackground source={Images.BackgroundImg} 
                 style={{ width:'100%', height:'100%' }}>
-                {this.state.fontLoaded?(
+                {this.props.fontLoaded?(
                     
                 <View style={[styles.container_no_bg]}>
                     <View style={{flex: 1,
@@ -83,48 +86,43 @@ class Login extends React.Component {
                     alignItems: 'center',
                     justifyContent: 'flex-start',
                     marginTop:15}}>
-                <Card 
-                    containerStyle={{borderRadius:5,borderWidth:0,backgroundColor:'#f7fafc',elevation:3,shadowColor:"gray",shadowOffset:{ height: 1, width: 0 }}}
-                    title="Login Information"
-                    titleStyle={{textAlign:'left',fontFamily:'Raleway_bold'}} >
-                    <TextInput
-                    style={styles.textInputBox}
-                    // value={this.props.user.email}
-                    // onChangeText={input => this.props.updateEmail(input)}
-                    value={this.state.controls.email.value}
-                    onChangeText={(val) => this.updateControlState('email',val)}
-                    placeholder='Email'
-                    placeholderTextColor='#262626'
-                    />
-                    <TextInput
-                    style={styles.textInputBox}
-                    // value={this.props.user.password}
-                    // onChangeText={input => this.props.updatePassword(input)}
-                    value={this.state.controls.password.value}
-                    onChangeText={(val) => this.updateControlState('password',val)}
-                    placeholder='Password'
-                    placeholderTextColor='#262626'
-                    secureTextEntry={true}
-                    />
-                    <TouchableOpacity 
-                        style={[styles.button,styles.buttonPrimary]} 
-                        onPress={this.userloginhandler}>
-                        <Text style={{color:'white', fontFamily:'Raleway_bold'}}>LOGIN</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style={[styles.button,styles.buttonSecondary]} 
-                        onPress={this.userloginhandler}>
-                        <Text style={{color:'white', fontFamily:'Raleway_bold'}}>CANCEL</Text>
-                    </TouchableOpacity>
-                    </Card>
-                    {/* <TouchableOpacity 
-                        style={[styles.button,styles.buttonPrimary]} 
-                        onPress={this.userloginhandler}>
-                        <Text style={{color:'white', fontFamily:'Raleway_bold'}}>LOGIN</Text>
-                    </TouchableOpacity> */}
-                </View>
+                        <Card 
+                            containerStyle={{borderRadius:5,borderWidth:0,backgroundColor:'#f7fafc',elevation:3,shadowColor:"gray",shadowOffset:{ height: 1, width: 0 }}}
+                            title="Login Information"
+                            titleStyle={{textAlign:'left',fontFamily:'Raleway_bold'}} >
+                            <TextInput
+                            style={styles.textInputBox}
+                            // value={this.props.user.email}
+                            // onChangeText={input => this.props.updateEmail(input)}
+                            value={this.state.controls.email.value}
+                            onChangeText={(val) => this.updateControlState('email',val)}
+                            placeholder='Email'
+                            placeholderTextColor='#262626'
+                            />
+                            <TextInput
+                            style={styles.textInputBox}
+                            // value={this.props.user.password}
+                            // onChangeText={input => this.props.updatePassword(input)}
+                            value={this.state.controls.password.value}
+                            onChangeText={(val) => this.updateControlState('password',val)}
+                            placeholder='Password'
+                            placeholderTextColor='#262626'
+                            secureTextEntry={true}
+                            />
+                            <TouchableOpacity 
+                                style={[styles.button,styles.buttonPrimary]} 
+                                onPress={this.userloginhandler}>
+                                <Text style={{color:'white', fontFamily:'Raleway_bold'}}>LOGIN</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                style={[styles.button,styles.buttonSecondary]} 
+                                onPress={this.userloginhandler}>
+                                <Text style={{color:'white', fontFamily:'Raleway_bold'}}>CANCEL</Text>
+                            </TouchableOpacity>
+                        </Card>
+                    </View>
                 </View> ) : (
-                        <ActivityIndicator size="large"/>
+                    <ActivityIndicator size="large"/>
                 )}
                 
             </ImageBackground>
@@ -136,11 +134,14 @@ class Login extends React.Component {
       
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//       user: state.user
-//     }
-//   }
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ loadCustomFont }, dispatch)
+}
+const mapStateToProps = (state) => {
+    return {
+        fontLoaded: state.fontReducer.fontLoaded
+    }
+  }
   
-//   export default connect(mapStateToProps, null)(Login)
-export default Login
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
+//export default Login
