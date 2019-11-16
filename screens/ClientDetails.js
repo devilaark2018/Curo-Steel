@@ -11,7 +11,14 @@ const item = {
         clientname: "ISGEC Titan Metal Fabricators Pvt Ltd",
         clientgst: "gstfdfsfsgfdg",
         clientBills: 3,
-        clientSts:"Enable"
+        clientSts:"Enable",
+        Address:{
+            line1:"RAMLILA GROUND",
+            line2:"",
+            state:"Haryana",
+            city:"Yamuna Nagar",
+            postal:"135001"
+        }
 
 }
 class ClientDetails extends Component {
@@ -45,6 +52,43 @@ class ClientDetails extends Component {
                             <Text style={[tempstyles.txt_disp_value]}>{item.clientSts}</Text>
                         </View>        
                     </View>   
+                    <View style={{ padding: 4, marginBottom: 5, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <View style={{width:'100%',borderBottomWidth:2,borderBottomColor:'#cad1d7'}}>
+                            <Text style={{fontSize:16,fontWeight:'700',width:'100%'}}>
+                                Address
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={{ padding: 4, marginBottom: 5, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <View style={[tempstyles.form_group,{width: '100%'}]}>
+                            <Text style={[tempstyles.txt_disp_lbl]}>Line 1</Text>
+                            <Text style={[tempstyles.txt_disp_value]}>{item.Address.line1}</Text>
+                        </View>        
+                    </View> 
+                    <View style={{ padding: 4, marginBottom: 5, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <View style={[tempstyles.form_group,{width: '100%'}]}>
+                            <Text style={[tempstyles.txt_disp_lbl]}>Line 2</Text>
+                            <Text style={[tempstyles.txt_disp_value]}>{item.Address.line2}</Text>
+                        </View>        
+                    </View> 
+                    <View style={{ padding: 4, marginBottom: 5, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <View style={[tempstyles.form_group,{width: '100%'}]}>
+                            <Text style={[tempstyles.txt_disp_lbl]}>State</Text>
+                            <Text style={[tempstyles.txt_disp_value]}>{item.Address.state}</Text>
+                        </View>        
+                    </View> 
+                    <View style={{ padding: 4, marginBottom: 5, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <View style={[tempstyles.form_group,{width: '100%'}]}>
+                            <Text style={[tempstyles.txt_disp_lbl]}>City</Text>
+                            <Text style={[tempstyles.txt_disp_value]}>{item.Address.city}</Text>
+                        </View>        
+                    </View> 
+                    <View style={{ padding: 4, marginBottom: 5, flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <View style={[tempstyles.form_group,{width: '100%'}]}>
+                            <Text style={[tempstyles.txt_disp_lbl]}>Postal</Text>
+                            <Text style={[tempstyles.txt_disp_value]}>{item.Address.postal}</Text>
+                        </View>        
+                    </View> 
                 </Card>
             </View>
         )
