@@ -20,25 +20,106 @@ const dataClients = [
         clientname: "ISGEC Titan Metal Fabricators Pvt Ltd",
         clientgst: "gstfdfsfsgfdg",
         clientBills: 3
+    },
+    {
+        id: "3",
+        clientname: "ISGEC Titan Metal Fabricators Pvt Ltd",
+        clientgst: "gstfdfsfsgfdg",
+        clientBills: 3
+    },
+    {
+        id: "4",
+        clientname: "ISGEC Titan Metal Fabricators Pvt Ltd",
+        clientgst: "gstfdfsfsgfdg",
+        clientBills: 3
+    },
+    {
+        id: "5",
+        clientname: "ISGEC Titan Metal Fabricators Pvt Ltd",
+        clientgst: "gstfdfsfsgfdg",
+        clientBills: 3
     }];
 
 
 
 
-    function Item ({ title }) {
+function Item ({ title }) {
         return (
           <View style={[{backgroundColor:'#d9d9d9',padding: 6,alignItems: 'center',justifyContent:'center', width:width,borderBottomColor:'#8E8E8E',borderBottomWidth:1}]}>
             <Text style={styles.title}>{title}</Text>
           </View>
         );
-      }
+}
 
 class DashBoard extends React.Component {
     
+    constructor(props){
+        super(props);
+        this.state = {
+            loading: false,
+            data: dataClients,
+            error: null,
+            refreshing: false
+          };
+      
+        this.arrayholder = dataClients;
+    }
+
+
     _gotoDetail(){
         //ClientDetails
         this.props.navigation.navigate('ClientDetails')
     }
+    
+
+    handleRefresh = () => {
+        this.setState({refreshing: true});
+        dataClients.push(
+            {
+                id: "6",
+                clientname: "ISGEC Titan Metal Fabricators Pvt Ltd",
+                clientgst: "gsstfdfsfsgfdg",
+                clientBills: 3
+            }
+        )
+        this.setState({
+            data: dataClients,
+            refreshing: false
+          });
+    }
+
+    searchFilterFunction = (text) =>{
+
+        this.setState({
+            value: text,
+          });
+      
+          const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.clientname.toUpperCase()} ${item.clientgst.toUpperCase()}`;
+            const textData = text.toUpperCase();
+      
+            return itemData.indexOf(textData) > -1;
+          });
+          this.setState({
+            data: newData,
+          });
+
+    }
+
+    _renderHeader = () => {
+        return ( 
+            <SearchBar placeholder = "Search Client..." containerStyle={{backgroundColor:"#F7FAFC"}} 
+            inputContainerStyle={{backgroundColor:"white"}} 
+            lightTheme clearIcon={{color:"#f47532"}} 
+            searchIcon={{color:"#f47532"}}  
+            onChangeText = {(text) => this.searchFilterFunction(text)}
+            autoCorrect = {false}
+            value={this.state.value}
+            />    
+        );
+    };
+
+
     _Itemrender ( item ) {
         return (
             <TouchableOpacity onPress={()=>{this._gotoDetail()}} style={[{backgroundColor:'white',padding: 6,alignItems: 'center',justifyContent:'center', width:width,borderBottomColor:'black',borderBottomWidth:2}]}>
@@ -64,10 +145,13 @@ class DashBoard extends React.Component {
         return(
             <View style={[tempstyles.container]}>
                 <FlatList
-                data={dataClients}
+                data={this.state.data}
                 keyExtractor={item => item.id}
                 // renderItem = {({ item }) => <Item title={item.clientname} />}
                 renderItem = {({ item }) => this._Itemrender(item) }
+                ListHeaderComponent={this._renderHeader}
+                refreshing = {this.state.refreshing}
+                onRefresh = {this.handleRefresh}
                 />
 
                 
