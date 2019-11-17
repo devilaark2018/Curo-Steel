@@ -18,8 +18,8 @@ const DashBoardStackNavigator = createStackNavigator({
         navigationOptions: ({navigation})=>({
             title: 'Client Details',
             headerLeft: <View style={{flexDirection: "row",justifyContent: "flex-start",width: 60}}>
-                <Icon name="md-menu" onPress={()=>navigation.openDrawer()} style={{paddingLeft:10,color:"#f47532"}} size={30}/>
                 <Icon name="md-arrow-back" onPress={()=>navigation.goBack()} style={{paddingLeft:10,color:"#f47532"}} size={30}/>
+                <Icon name="md-menu" onPress={()=>navigation.openDrawer()} style={{paddingLeft:10,color:"#f47532"}} size={30}/>
             </View>,
           })
     }
