@@ -32,6 +32,7 @@ const AdminDrawNavigator = createDrawerNavigator({
         }
     },
 },{
+    initialRouteName: "Orders",
     contentComponent: AdminMenu,
     contentOptions: {
     activeTintColor: '#f47532',
