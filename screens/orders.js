@@ -137,6 +137,7 @@ const tempstyles = StyleSheet.create({
         // alignItems:"center",
         // justifyContent:"center",
         backgroundColor:"#F7FAFC"
+        // backgroundColor:"#d1d5e1"
     },
     item: {
       backgroundColor: '#f9c2ff',
