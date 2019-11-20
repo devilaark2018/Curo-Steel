@@ -8,8 +8,12 @@ import {createBottomTabNavigator,createAppContainer} from 'react-navigation';
 import {TouchableOpacity} from 'react-native'
 
 const BillBoardTabNavigator = createBottomTabNavigator({
-    Search: {screen: BillSearchStackNavigator},
-    Scan: {screen: BillScanStackNavigator}
+    Search: {
+      screen: BillSearchStackNavigator
+    },
+    Scan: {
+      screen: BillScanStackNavigator
+    }
 },{
     navigationOptions: ({ navigation }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
