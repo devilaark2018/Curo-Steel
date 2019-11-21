@@ -32,7 +32,7 @@ const AdminDrawNavigator = createDrawerNavigator({
         }
     },
 },{
-    initialRouteName: "Orders",
+    initialRouteName: "Billboard",
     contentComponent: AdminMenu,
     contentOptions: {
     activeTintColor: '#f47532',
