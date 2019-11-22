@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
 import fontReducer from './fontreducer';
 import userReducer from './userreducer';
+import clientReducer from './clientreducer';
+import billReducer from './billreducer';
+import orderReducer from './orderreducer';
 const initialState = {
     dlgDetails:{
       showdlg:false,
@@ -31,6 +34,9 @@ const progressDlgReducer = (state = initialState, action) =>{
 const rootReducer = combineReducers({
     progressDlgReducer,
     fontReducer,
-    userReducer
+    userReducer,
+    clientReducer,
+    billReducer,
+    orderReducer
 })
 export default rootReducer
