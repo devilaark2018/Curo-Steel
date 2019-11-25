@@ -1,4 +1,7 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getClientList, updateClientList } from '../actions/dashboard'
 import styles from '../app_styles/styles';
 import { Text, FlatList, Image, View, TextInput, TouchableOpacity, Dimensions, ImageBackground, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView,ActivityIndicator} from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
@@ -55,14 +58,23 @@ class DashBoard extends React.Component {
     
     constructor(props){
         super(props);
+        this.props.getClientList({u_id:1,u_token:'ARYA_CG5dc1c7f154cff2.46524102'});
         this.state = {
             loading: false,
-            data: dataClients,
+            data: this.props.clientObj.clients_searchlist,
             error: null,
             refreshing: false
           };
       
-        this.arrayholder = dataClients;
+        //this.arrayholder = dataClients;
+        //this.props.getClientList({u_id:1,u_token:'ARYA_CG5dc1788140a585.72789277'});
+        
+        // if(this.props.clientObj.clientLoaded){
+        //     this.setState({
+        //         data: this.props.clientObj.clients,
+        //         refreshing: false
+        //     });
+        // }
     }
 
 
@@ -74,35 +86,39 @@ class DashBoard extends React.Component {
 
     handleRefresh = () => {
         this.setState({refreshing: true});
-        dataClients.push(
-            {
-                id: "6",
-                clientname: "ISGEC Titan Metal Fabricators Pvt Ltd",
-                clientgst: "gsstfdfsfsgfdg",
-                clientBills: 3
-            }
-        )
-        this.setState({
-            data: dataClients,
-            refreshing: false
-          });
+        // dataClients.push(
+        //     {
+        //         id: "6",
+        //         clientname: "ISGEC Titan Metal Fabricators Pvt Ltd",
+        //         clientgst: "gsstfdfsfsgfdg",
+        //         clientBills: 3
+        //     }
+        // )
+        this.props.getClientList({u_id:1,u_token:'ARYA_CG5dc1c7f154cff2.46524102'});
+        if(this.props.clientObj.clientLoaded){
+            this.setState({
+                //data: this.props.clientObj.clients,
+                refreshing: false
+            });
+        }
+        
     }
 
     searchFilterFunction = (text) =>{
-
+        console.log(text);
         this.setState({
-            value: text,
-          });
-      
-          const newData = this.arrayholder.filter(item => {
+            value: text
+        });
+
+        const newData = this.props.clientObj.clients.filter(item => {
             const itemData = `${item.clientname.toUpperCase()} ${item.clientgst.toUpperCase()}`;
             const textData = text.toUpperCase();
-      
             return itemData.indexOf(textData) > -1;
-          });
-          this.setState({
-            data: newData,
-          });
+        });
+        this.props.updateClientList(newData);
+        // this.setState({
+        //     data: newData,
+        // });
 
     }
 
@@ -145,7 +161,7 @@ class DashBoard extends React.Component {
         return(
             <View style={[tempstyles.container]}>
                 <FlatList
-                data={this.state.data}
+                data={this.props.clientObj.clients_searchlist}
                 keyExtractor={item => item.id}
                 // renderItem = {({ item }) => <Item title={item.clientname} />}
                 renderItem = {({ item }) => this._Itemrender(item) }
@@ -178,4 +194,18 @@ const tempstyles = StyleSheet.create({
     },
 });
 
-export default DashBoard
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ getClientList,updateClientList }, dispatch)
+  }
+  
+  const mapStateToProps = (state) => {
+    return {
+    //   post: state.post,
+    //   user: state.user,
+    //   user_detail: state.userReducer.userDetail,
+    //   uiDlg: state.progressDlgReducer,
+      clientObj: state.clientReducer
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard)

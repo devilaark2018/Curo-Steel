@@ -8,12 +8,19 @@ const clientReducer = (state = initialState, action) =>{
             return {
                 ...state,
                 clients:action.clients,
+                clients_searchlist:action.clients,
                 clientLoaded:true
+            };
+        case 'UPDATE_CLIENTLIST':
+            return{
+                ...state,
+                clients_searchlist:action.clients,
             };
         case 'CLEAR_CLIENTLIST':
             return {
                 ...state,
                 clients:[],
+                clients_searchlist:[],
                 clientLoaded:false
             };
         default:
